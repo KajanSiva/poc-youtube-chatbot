@@ -58,12 +58,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
+          'h-screen md:min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
       >
-        <div className='h-screen flex'>
-          <div className='w-[400px] h-full border-r-2 flex flex-col justify-between'>
+        <div className='h-screen flex md:flex-row flex-col'>
+          <div className='md:w-[400px] md:h-full border: 0 md:border-r-2 flex flex-col md:justify-between'>
             <div className='flex justify-between border-b-2 p-4'>
               <Link className='flex items-center gap-2' href='/'>
                 <VideoIcon className='w-5 h-5' />
@@ -71,7 +71,7 @@ export default function RootLayout({
               </Link>
               <Button>New</Button>
             </div>
-            <div className='flex flex-col gap-4 p-4 flex-1'>
+            <div className='md:flex flex-col gap-4 p-4 flex-1 hidden overflow-y-auto'>
               {Object.entries(history).map(([key, value]) => (
                 <div key={key} className='flex flex-col gap-2 w-full max-w-md'>
                   <p className='text-sm'>{key}</p>
@@ -90,14 +90,14 @@ export default function RootLayout({
                 </div>
               ))}
             </div>
-            <div className='flex items-center gap-2 border-t-2 p-4'>
+            <div className='hidden md:flex items-center gap-2 border-t-2 p-4'>
               <Avatar>
                 <AvatarFallback>KS</AvatarFallback>
               </Avatar>
               <p>Kajan Siva</p>
             </div>
           </div>
-          <div className='flex-1 p-4'>
+          <div className='flex-1 p-4 overflow-y-auto'>
             {children}
           </div>
         </div>

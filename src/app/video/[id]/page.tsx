@@ -44,8 +44,8 @@ export default function Home() {
         <div className="flex flex-1 content-center items-center">
           <h1>Loading...</h1>
         </div>
-        <div className="flex gap-2">
-          <Skeleton className="h-[60px] w-96" />
+        <div className="flex w-full gap-2 fixed md:static bottom-0 bg-white p-2 md:p-0 border-t-2 md:border-t-0">
+          <Skeleton className="h-[60px] flex-1 md:w-96" />
           <Skeleton className="h-9 w-20" />
         </div>
       </main>
@@ -53,13 +53,13 @@ export default function Home() {
   }
 
   return (
-    <main className="flex h-full flex-col content-center items-center justify-end gap-4">
+    <main className="flex md:h-full flex-col content-center items-center justify-end gap-4 pb-20 md:pb-0">
       {messages.length === 0 ? (
         <div className="flex flex-1 content-center items-center">
           <h1>How can I help you?</h1>
         </div>
       ) : (
-        <div className='w-full overflow-y-auto'>
+        <div className='w-full md:overflow-y-auto'>
           {messages.map((message, index) => (
             <div key={index} className="flex w-full max-w-md flex-col gap-3 m-auto">
               <div className="flex items-center gap-2 py-2">
@@ -74,8 +74,8 @@ export default function Home() {
         </div>
       )}
 
-      <div className="flex gap-2">
-        <Textarea placeholder="Type your message here" className="w-96" />
+      <div className="flex w-full gap-2 fixed md:static bottom-0 bg-white p-2 md:p-0 border-t-2 md:border-t-0">
+        <Textarea placeholder="Type your message here" className="md:w-96 flex-1" />
         <Button>Submit</Button>
       </div>
     </main>
