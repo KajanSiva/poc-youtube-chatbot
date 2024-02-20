@@ -69,11 +69,11 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          'h-screen bg-background font-sans antialiased md:min-h-screen',
+          'h-dvh bg-background font-sans antialiased md:min-h-dvh',
           fontSans.variable
         )}
       >
-        <div className="flex h-screen flex-col md:flex-row">
+        <div className="flex h-dvh flex-col md:flex-row">
           <div className="border: 0 flex flex-col md:h-full md:w-[400px] md:justify-between md:border-r-2">
             <div className="flex justify-between border-b-2 p-4">
               <Link className="flex items-center gap-2" href="/">
