@@ -26,11 +26,11 @@ export async function POST(request: Request) {
   const pinecone = new Pinecone();
   const pineconeIndex = pinecone.Index(pineconeIndexName);
 
-  const docs = await extractDataFromVideo(videoUrl);
+  const [docs, source] = await extractDataFromVideo(videoUrl);
 
   await createEmbeddings(openAIApiKey, docs, pineconeIndex);
 
-  return NextResponse.json(true);
+  return NextResponse.json({ source });
 }
 
 async function extractDataFromVideo(videoUrl: string) {
@@ -48,7 +48,9 @@ async function extractDataFromVideo(videoUrl: string) {
   const splitter = new RecursiveCharacterTextSplitter();
   const splittedDocs = await splitter.splitDocuments(docs);
 
-  return splittedDocs;
+  const source = rawDocs[0].metadata.source;
+
+  return [splittedDocs, source];
 }
 
 async function createEmbeddings(
