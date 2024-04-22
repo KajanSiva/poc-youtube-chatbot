@@ -5,6 +5,7 @@ import { Index, Pinecone, RecordMetadata } from '@pinecone-database/pinecone';
 import { OpenAIEmbeddings } from '@langchain/openai';
 import { PineconeStore } from '@langchain/pinecone';
 import { Document } from '@langchain/core/documents';
+import he from 'he';
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -41,11 +42,14 @@ async function extractDataFromVideo(videoUrl: string) {
 
   const rawDocs = await loader.load();
   const docs = rawDocs.map((doc) => ({
-    pageContent: doc.pageContent,
+    pageContent: he.decode(doc.pageContent),
     metadata: { source: doc.metadata.source },
   }));
 
-  const splitter = new RecursiveCharacterTextSplitter();
+  const splitter = new RecursiveCharacterTextSplitter({
+    chunkSize: 1000,
+    chunkOverlap: 200,
+  });
   const splittedDocs = await splitter.splitDocuments(docs);
 
   const source = rawDocs[0].metadata.source;
